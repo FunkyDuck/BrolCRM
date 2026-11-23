@@ -196,3 +196,8 @@ brol/
 - Lors de chaque itération, faire un `git add * && git commit -m '${new_version_number}' && git push`
 - Si modification via le prompt sans passer par un fichier .md, le commit sera le suivant : `git commit -m '[FIX] ${fix_reason}'`
 - En cas de conflit, demander quoi faire pour savoir s'il faut fusionner ou pas les fichiers
+
+## 12. Modifications de fonctionnalités v1.5.2
+1. Ajoute un thème `Peach Sorbet` : #f08080 - #f4978e - #f8ad9d - #fbc4ab - #ffdab9
+2. Un thème `Paster Watecolor` : ["#b0a1ba","#a5b5bf","#abc8c7","#b8e2c8","#bff0d4"]
+3. Un thème `Sunny Beach` : ["#264653","#2a9d8f","#e9c46a","#f4a261","#e76f51"]

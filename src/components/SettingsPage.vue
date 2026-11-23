@@ -3,7 +3,17 @@ import { ref } from 'vue'
 import ConfirmDialog from './ConfirmDialog.vue'
 import { t } from '../i18n'
 
-export type ThemeName = 'dark' | 'light' | 'green' | 'blue' | 'red' | 'purple' | 'orange'
+export type ThemeName =
+  | 'dark'
+  | 'light'
+  | 'green'
+  | 'blue'
+  | 'red'
+  | 'purple'
+  | 'orange'
+  | 'peach-sorbet'
+  | 'pastel-watercolor'
+  | 'sunny-beach'
 export type LanguageCode = 'fr' | 'en'
 
 const props = defineProps<{
@@ -28,6 +38,9 @@ const themes: { value: ThemeName; label: string; color: string }[] = [
   { value: 'red', label: props.language === 'fr' ? 'Rouge' : 'Red', color: '#7f1d1d' },
   { value: 'purple', label: props.language === 'fr' ? 'Mauve' : 'Purple', color: '#581c87' },
   { value: 'orange', label: props.language === 'fr' ? 'Orange' : 'Orange', color: '#9a3412' },
+  { value: 'peach-sorbet', label: 'Peach Sorbet', color: '#f4978e' },
+  { value: 'pastel-watercolor', label: 'Pastel Watercolor', color: '#a5b5bf' },
+  { value: 'sunny-beach', label: 'Sunny Beach', color: '#2a9d8f' },
 ]
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const version = '1.5.1'
+const version = '1.5.2'
 </script>
 
 <template>

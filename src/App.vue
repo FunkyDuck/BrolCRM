@@ -44,7 +44,17 @@ const {
 const quickAddOpen = ref(false)
 const activeView = ref<'list' | 'stats' | 'calendar' | 'whatsnew' | 'settings' | 'about'>('list')
 const notificationsOpen = ref(false)
-type ThemeName = 'dark' | 'light' | 'green' | 'blue' | 'red' | 'purple' | 'orange'
+type ThemeName =
+  | 'dark'
+  | 'light'
+  | 'green'
+  | 'blue'
+  | 'red'
+  | 'purple'
+  | 'orange'
+  | 'peach-sorbet'
+  | 'pastel-watercolor'
+  | 'sunny-beach'
 type LanguageCode = 'fr' | 'en'
 const theme = ref<ThemeName>('dark')
 const language = ref<LanguageCode>('fr')

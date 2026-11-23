@@ -2,6 +2,11 @@
 import { locale } from '../i18n'
 const releases = [
   {
+    version: '1.5.2',
+    title: 'Nouveaux thèmes',
+    items: ['Thème Peach Sorbet', 'Thème Pastel Watercolor', 'Thème Sunny Beach'],
+  },
+  {
     version: '1.5',
     title: 'Calendrier, personnalisation et sources',
     items: ['Source du prospect', 'Planning des relances', 'Thèmes, langue et mode malvoyant', 'Page Paramètres'],

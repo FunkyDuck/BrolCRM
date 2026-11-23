@@ -33,6 +33,18 @@
   color: #ffedd5;
   background: #431407;
 }
+:root[data-theme="peach-sorbet"] {
+  color: #4a2525;
+  background: #ffdab9;
+}
+:root[data-theme="pastel-watercolor"] {
+  color: #374151;
+  background: #e8eef0;
+}
+:root[data-theme="sunny-beach"] {
+  color: #264653;
+  background: #e9c46a;
+}
 
 :root.large-text {
   font-size: 18px;
@@ -86,6 +98,27 @@
   --panel-strong: #c2410c;
   --app-text: #ffedd5;
   --muted-text: #fed7aa;
+}
+:root[data-theme="peach-sorbet"] {
+  --app-bg: #fff0e6;
+  --panel-bg: #fbc4ab;
+  --panel-strong: #f4978e;
+  --app-text: #6b2d2d;
+  --muted-text: #9a5555;
+}
+:root[data-theme="pastel-watercolor"] {
+  --app-bg: #edf2f3;
+  --panel-bg: #d9e5e6;
+  --panel-strong: #b0a1ba;
+  --app-text: #374151;
+  --muted-text: #64748b;
+}
+:root[data-theme="sunny-beach"] {
+  --app-bg: #264653;
+  --panel-bg: #2a9d8f;
+  --panel-strong: #e9c46a;
+  --app-text: #fff7db;
+  --muted-text: #f4a261;
 }
 
 :root[data-theme]:not([data-theme="dark"]) #app,
