@@ -79,6 +79,7 @@ export function useBrol() {
         ? [...new Set(prospect.tags.map((tag) => tag.trim().toLowerCase()).filter(Boolean))]
         : [],
       source: prospect.source ?? '',
+      followupHistory: Array.isArray(prospect.followupHistory) ? prospect.followupHistory : [],
       phone: prospect.phone ?? '',
       address: prospect.address ?? '',
       addressStreet: prospect.addressStreet ?? '',
@@ -122,6 +123,7 @@ export function useBrol() {
       techPainPoint: input.techPainPoint.trim(),
       notes: '',
       interactions: [],
+      followupHistory: [],
       createdAt: now,
       updatedAt: now,
     }

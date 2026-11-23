@@ -2,6 +2,13 @@
 import { locale } from '../i18n'
 const releases = [
   {
+    version: '1.5.4',
+    title: locale.value === 'fr' ? 'Relances et identité' : 'Follow-ups and identity',
+    items: locale.value === 'fr'
+      ? ['Téléphone par défaut avec indicatif belge', 'Historique des changements de relance', 'Logo B agrandi', 'Police Sarina pour Brol CRM']
+      : ['Belgian phone prefix by default', 'Follow-up change history', 'Larger B logo', 'Sarina font for Brol CRM'],
+  },
+  {
     version: '1.5.3',
     title: locale.value === 'fr' ? 'Import, données et lieu' : 'Import, data and location',
     items: locale.value === 'fr'

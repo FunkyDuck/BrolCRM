@@ -210,3 +210,9 @@ brol/
 4. Lors de l'importation de données, laisser la possibilité de fusionner ou d'écraser les données
 5. Déplacer le bouton "What's News" dans les paramètres.
 6. Enregistrer le numéro de version utilisé. Si mise à jour/version plus récente, afficher un "What's News" pour la dernière mise à jour et puis mettre à jour le numéro de version
+
+## 13. Modification de fonctionnalités v1.5.4
+1. Remplacer le placeholder du téléphone par un indicatif belge
+2. Garder un historique des relances
+3. Fait le B du logo un peu plus gros. Et note CRM à côté de Brol
+4. Utilise la font Sarina de google fonts pour le logo et Brol CRM

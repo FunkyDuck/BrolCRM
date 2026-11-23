@@ -14,6 +14,12 @@ export interface Interaction {
   summary: string;
 }
 
+export interface FollowupEntry {
+  id: string;
+  date: string;
+  followupDate: string | null;
+}
+
 export interface Prospect {
   id: string;
   companyName: string;
@@ -33,6 +39,7 @@ export interface Prospect {
   techPainPoint: string;
   notes: string;
   interactions: Interaction[];
+  followupHistory: FollowupEntry[];
   createdAt: string;
   updatedAt: string;
 }

@@ -63,7 +63,7 @@ watch(() => props.open, async (open) => {
 function submit() {
   if (!companyName.value.trim()) return
   if (phone.value.trim() && !/^\+?[1-9]\d{7,14}$/.test(phone.value.trim())) {
-    phoneError.value = 'Format international attendu, par exemple +33612345678'
+    phoneError.value = 'Format international attendu, par exemple +32...'
     return
   }
   emit('submit', {
@@ -116,7 +116,7 @@ function addTag() {
         <div class="mb-4 grid grid-cols-2 gap-3">
           <label>
             <span class="mb-1.5 block text-xs font-medium text-zinc-400">Téléphone</span>
-            <input v-model="phone" type="tel" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="+33..." />
+            <input v-model="phone" type="tel" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="+32..." />
             <span v-if="phoneError" class="mt-1 block text-[11px] text-red-400">{{ phoneError }}</span>
           </label>
           <label>

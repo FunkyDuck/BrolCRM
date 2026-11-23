@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import type { Interaction, InteractionType, Prospect, ProspectStatus } from '../types/brol'
+import type { FollowupEntry, Interaction, InteractionType, Prospect, ProspectStatus } from '../types/brol'
 import ConfirmDialog from './ConfirmDialog.vue'
 import { cities, countries } from '../data/locations'
 
@@ -49,10 +49,21 @@ const statusClasses: Record<ProspectStatus, { active: string; idle: string }> = 
 
 function update(patch: Partial<Prospect>) {
   if (!local.value) return
+  if ('nextFollowup' in patch) {
+    const nextFollowup = patch.nextFollowup ?? null
+    if (local.value.nextFollowup !== nextFollowup) {
+      const entry: FollowupEntry = {
+        id: crypto.randomUUID(),
+        date: new Date().toISOString(),
+        followupDate: nextFollowup,
+      }
+      patch.followupHistory = [entry, ...(local.value.followupHistory ?? [])]
+    }
+  }
   if ('phone' in patch) {
     const phone = String(patch.phone ?? '').trim()
     phoneError.value = phone && !/^\+?[1-9]\d{7,14}$/.test(phone)
-      ? 'Format international attendu, par exemple +33612345678'
+      ? 'Format international attendu, par exemple +32...'
       : ''
   }
   Object.assign(local.value, patch)
@@ -226,7 +237,7 @@ function confirmDeleteInteraction() {
             </label>
             <label>
               <span class="mb-1.5 block text-xs text-zinc-500">Téléphone</span>
-              <input :value="local.phone" type="tel" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="+33..." @input="update({ phone: ($event.target as HTMLInputElement).value })" />
+              <input :value="local.phone" type="tel" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="+32..." @input="update({ phone: ($event.target as HTMLInputElement).value })" />
               <span v-if="phoneError" class="mt-1 block text-[11px] text-red-400">{{ phoneError }}</span>
             </label>
             <label>
@@ -291,6 +302,13 @@ function confirmDeleteInteraction() {
               <button class="rounded-md bg-zinc-900 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-100" @click="setFollowup(3)">+3 jours</button>
               <button class="rounded-md bg-zinc-900 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-100" @click="setFollowup(7)">+1 semaine</button>
               <button class="rounded-md bg-zinc-900 px-3 py-1.5 text-xs text-zinc-400 hover:text-zinc-100" @click="setFollowup(30)">+1 mois</button>
+            </div>
+            <div v-if="local.followupHistory?.length" class="mt-3 space-y-1">
+              <p class="text-[11px] font-medium uppercase tracking-wide text-zinc-600">Historique des relances</p>
+              <div v-for="entry in local.followupHistory" :key="entry.id" class="flex items-center justify-between rounded-md bg-zinc-900 px-2 py-1.5 text-xs">
+                <span class="text-zinc-400">{{ entry.followupDate ? `Prévue le ${entry.followupDate}` : 'Relance effacée' }}</span>
+                <time class="text-zinc-600">{{ formatDate(entry.date) }}</time>
+              </div>
             </div>
           </section>
 

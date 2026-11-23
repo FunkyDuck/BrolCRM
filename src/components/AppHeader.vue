@@ -15,9 +15,9 @@ defineEmits<{
 <template>
   <header class="flex h-16 items-center justify-between border-b border-zinc-800 bg-zinc-950 px-5">
     <div class="flex items-center gap-3">
-      <div class="grid size-8 place-items-center rounded-lg bg-amber-400 text-sm font-black text-zinc-950">B</div>
+      <div class="grid size-10 place-items-center rounded-lg bg-amber-400 text-xl font-black text-zinc-950 sarina-logo">B</div>
       <div>
-        <h1 class="text-sm font-semibold tracking-wide text-zinc-100">BROL</h1>
+        <h1 class="sarina-logo text-sm leading-none text-zinc-100">Brol CRM</h1>
         <p class="text-xs text-zinc-500">{{ prospectCount }} prospect{{ prospectCount > 1 ? 's' : '' }}</p>
       </div>
     </div>

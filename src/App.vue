@@ -103,7 +103,7 @@ function keyboardHandler(event: KeyboardEvent) {
 
 onMounted(() => {
   void initialize()
-  const currentVersion = '1.5.3'
+  const currentVersion = '1.5.4'
   const previousVersion = localStorage.getItem('brol:lastVersion')
   const compareVersions = (current: string, previous: string) => {
     const currentParts = current.split('.').map((part) => Number(part) || 0)
