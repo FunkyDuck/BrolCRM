@@ -14,6 +14,7 @@ export type ThemeName =
   | 'peach-sorbet'
   | 'pastel-watercolor'
   | 'sunny-beach'
+  | 'rose-petal'
 export type LanguageCode = 'fr' | 'en'
 
 const props = defineProps<{
@@ -41,6 +42,7 @@ const themes: { value: ThemeName; label: string; color: string }[] = [
   { value: 'peach-sorbet', label: 'Peach Sorbet', color: '#f4978e' },
   { value: 'pastel-watercolor', label: 'Pastel Watercolor', color: '#a5b5bf' },
   { value: 'sunny-beach', label: 'Sunny Beach', color: '#2a9d8f' },
+  { value: 'rose-petal', label: 'Rose Petal', color: '#dd2d4a' },
 ]
 </script>
 

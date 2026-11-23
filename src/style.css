@@ -45,6 +45,10 @@
   color: #264653;
   background: #e9c46a;
 }
+:root[data-theme="rose-petal"] {
+  color: #880d1e;
+  background: #cbeef3;
+}
 
 :root.large-text {
   font-size: 18px;
@@ -119,6 +123,13 @@
   --panel-strong: #e9c46a;
   --app-text: #fff7db;
   --muted-text: #f4a261;
+}
+:root[data-theme="rose-petal"] {
+  --app-bg: #880d1e;
+  --panel-bg: #dd2d4a;
+  --panel-strong: #f26a8d;
+  --app-text: #fff4f7;
+  --muted-text: #cbeef3;
 }
 
 :root[data-theme]:not([data-theme="dark"]) #app,

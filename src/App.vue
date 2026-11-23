@@ -55,6 +55,7 @@ type ThemeName =
   | 'peach-sorbet'
   | 'pastel-watercolor'
   | 'sunny-beach'
+  | 'rose-petal'
 type LanguageCode = 'fr' | 'en'
 const theme = ref<ThemeName>('dark')
 const language = ref<LanguageCode>('fr')

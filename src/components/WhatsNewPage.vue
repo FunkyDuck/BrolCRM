@@ -4,7 +4,7 @@ const releases = [
   {
     version: '1.5.2',
     title: 'Nouveaux thèmes',
-    items: ['Thème Peach Sorbet', 'Thème Pastel Watercolor', 'Thème Sunny Beach'],
+    items: ['Thème Peach Sorbet', 'Thème Pastel Watercolor', 'Thème Sunny Beach', 'Thème Rose Petal'],
   },
   {
     version: '1.5',

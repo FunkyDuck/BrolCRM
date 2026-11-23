@@ -201,3 +201,4 @@ brol/
 1. Ajoute un thème `Peach Sorbet` : #f08080 - #f4978e - #f8ad9d - #fbc4ab - #ffdab9
 2. Un thème `Paster Watecolor` : ["#b0a1ba","#a5b5bf","#abc8c7","#b8e2c8","#bff0d4"]
 3. Un thème `Sunny Beach` : ["#264653","#2a9d8f","#e9c46a","#f4a261","#e76f51"]
+4. Un thème `Rose Petal` : ["#880d1e","#dd2d4a","#f26a8d","#f49cbb","#cbeef3"]
