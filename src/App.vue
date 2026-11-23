@@ -103,6 +103,20 @@ function keyboardHandler(event: KeyboardEvent) {
 
 onMounted(() => {
   void initialize()
+  const currentVersion = '1.5.3'
+  const previousVersion = localStorage.getItem('brol:lastVersion')
+  const compareVersions = (current: string, previous: string) => {
+    const currentParts = current.split('.').map((part) => Number(part) || 0)
+    const previousParts = previous.split('.').map((part) => Number(part) || 0)
+    for (let index = 0; index < 3; index++) {
+      const difference = (currentParts[index] ?? 0) - (previousParts[index] ?? 0)
+      if (difference !== 0) return difference > 0
+    }
+    return false
+  }
+  const isNewer = previousVersion ? compareVersions(currentVersion, previousVersion) : false
+  if (isNewer) activeView.value = 'whatsnew'
+  localStorage.setItem('brol:lastVersion', currentVersion)
   try {
     const saved = JSON.parse(localStorage.getItem('brol:settings') ?? '{}') as Partial<{
       theme: ThemeName
@@ -121,9 +135,9 @@ onMounted(() => {
 
 onUnmounted(() => window.removeEventListener('keydown', keyboardHandler))
 
-async function handleImport() {
+async function handleImport(mode: 'merge' | 'replace' = 'replace') {
   try {
-    await importDatabase()
+    await importDatabase(mode)
   } catch (error) {
     window.alert(error instanceof Error ? error.message : 'Importation impossible.')
   }
@@ -137,8 +151,6 @@ async function handleImport() {
       :active-view="activeView"
       :notification-count="notifications.length"
       @add="quickAddOpen = true"
-      @export="exportDatabase"
-      @import="handleImport"
       @notifications="notificationsOpen = true"
       @view="activeView = $event"
     />
@@ -178,6 +190,9 @@ async function handleImport() {
       @language="setLanguage"
       @large-text="setLargeText"
       @clear="clearDatabase"
+      @import="handleImport"
+      @export="exportDatabase"
+      @whats-new="activeView = 'whatsnew'"
     />
     <AboutPage v-else-if="activeView === 'about'" />
 

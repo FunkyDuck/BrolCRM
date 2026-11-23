@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import type { Interaction, InteractionType, Prospect, ProspectStatus } from '../types/brol'
 import ConfirmDialog from './ConfirmDialog.vue'
+import { cities, countries } from '../data/locations'
 
 const props = defineProps<{
   prospect: Prospect | null
@@ -61,7 +62,7 @@ function update(patch: Partial<Prospect>) {
 
 function addTag() {
   if (!local.value) return
-  const tag = tagInput.value.trim()
+  const tag = tagInput.value.trim().toLowerCase()
   if (!tag || local.value.tags.includes(tag)) return
   update({ tags: [...local.value.tags, tag] })
   tagInput.value = ''
@@ -234,10 +235,16 @@ function confirmDeleteInteraction() {
                 <input :value="local.addressStreet" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="Rue" @input="update({ addressStreet: ($event.target as HTMLInputElement).value, address: fullAddress({ ...local, addressStreet: ($event.target as HTMLInputElement).value }) })" />
                 <div class="grid grid-cols-2 gap-2">
                   <input :value="local.postalCode" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="Code postal" @input="update({ postalCode: ($event.target as HTMLInputElement).value, address: fullAddress({ ...local, postalCode: ($event.target as HTMLInputElement).value }) })" />
-                  <input :value="local.city" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="Ville" @input="update({ city: ($event.target as HTMLInputElement).value, address: fullAddress({ ...local, city: ($event.target as HTMLInputElement).value }) })" />
+                  <input :value="local.city" list="drawer-city-suggestions" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="Ville" @input="update({ city: ($event.target as HTMLInputElement).value, address: fullAddress({ ...local, city: ($event.target as HTMLInputElement).value }) })" />
+                  <datalist id="drawer-city-suggestions">
+                    <option v-for="cityName in cities" :key="cityName" :value="cityName"></option>
+                  </datalist>
                 </div>
                 <div class="flex gap-2">
-                  <input :value="local.country" class="min-w-0 flex-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="Pays" @input="update({ country: ($event.target as HTMLInputElement).value, address: fullAddress({ ...local, country: ($event.target as HTMLInputElement).value }) })" />
+                  <input :value="local.country" list="drawer-country-suggestions" class="min-w-0 flex-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-amber-400" placeholder="Pays" @input="update({ country: ($event.target as HTMLInputElement).value, address: fullAddress({ ...local, country: ($event.target as HTMLInputElement).value }) })" />
+                  <datalist id="drawer-country-suggestions">
+                    <option v-for="countryName in countries" :key="countryName" :value="countryName"></option>
+                  </datalist>
                   <button v-if="fullAddress(local)" type="button" class="rounded-md border border-zinc-800 px-2 text-xs text-zinc-400 hover:text-amber-400" @click="openMap">Carte</button>
                 </div>
               </div>

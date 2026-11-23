@@ -75,6 +75,9 @@ export function useBrol() {
     const loaded = await loadDatabase()
     loaded.prospects = loaded.prospects.map((prospect) => ({
       ...prospect,
+      tags: Array.isArray(prospect.tags)
+        ? [...new Set(prospect.tags.map((tag) => tag.trim().toLowerCase()).filter(Boolean))]
+        : [],
       source: prospect.source ?? '',
       phone: prospect.phone ?? '',
       address: prospect.address ?? '',
@@ -82,7 +85,6 @@ export function useBrol() {
       postalCode: prospect.postalCode ?? '',
       city: prospect.city ?? '',
       country: prospect.country ?? '',
-      tags: Array.isArray(prospect.tags) ? prospect.tags : [],
     }))
     database.value = loaded
     await saveDatabase(database.value)
@@ -113,7 +115,7 @@ export function useBrol() {
       postalCode: input.postalCode.trim(),
       city: input.city.trim(),
       country: input.country.trim(),
-      tags: [...input.tags],
+      tags: [...new Set(input.tags.map((tag) => tag.trim().toLowerCase()).filter(Boolean))],
       website: input.website.trim(),
       status: 'to_contact',
       nextFollowup: null,
@@ -131,6 +133,9 @@ export function useBrol() {
     const index = database.value.prospects.findIndex((prospect) => prospect.id === id)
     if (index === -1) return
     const trimmedPatch = { ...patch }
+    if (Array.isArray(trimmedPatch.tags)) {
+      trimmedPatch.tags = [...new Set(trimmedPatch.tags.map((tag) => tag.trim().toLowerCase()).filter(Boolean))]
+    }
     for (const key of ['companyName', 'contactName', 'email', 'phone', 'website', 'techPainPoint', 'notes', 'address', 'addressStreet', 'postalCode', 'city', 'country', 'source'] as const) {
       if (typeof trimmedPatch[key] === 'string') {
         trimmedPatch[key] = trimmedPatch[key]!.trim()
@@ -256,7 +261,7 @@ export function useBrol() {
     }
   }
 
-  async function importDatabase() {
+  async function importDatabase(mode: 'merge' | 'replace' = 'replace') {
     let json: string | null = null
     if ('__TAURI_INTERNALS__' in window) {
       const { open } = await import('@tauri-apps/plugin-dialog')
@@ -284,10 +289,7 @@ export function useBrol() {
     if (!parsed || parsed.version !== 1 || !Array.isArray(parsed.prospects)) {
       throw new Error('Fichier JSON Brol invalide.')
     }
-    if (window.confirm('Cette importation remplacera toutes les données actuelles. Continuer ?')) {
-      database.value = {
-        ...parsed,
-        prospects: parsed.prospects.map((prospect) => ({
+    const normalizedProspects = parsed.prospects.map((prospect) => ({
           ...prospect,
           source: prospect.source ?? '',
           phone: prospect.phone ?? '',
@@ -296,11 +298,30 @@ export function useBrol() {
           postalCode: prospect.postalCode ?? '',
           city: prospect.city ?? '',
           country: prospect.country ?? '',
-          tags: Array.isArray(prospect.tags) ? prospect.tags : [],
-        })),
+          tags: Array.isArray(prospect.tags)
+            ? [...new Set(prospect.tags.map((tag) => tag.trim().toLowerCase()).filter(Boolean))]
+            : [],
+        }))
+    if (mode === 'merge') {
+      const merged = [...database.value.prospects]
+      normalizedProspects.forEach((prospect) => {
+        const index = merged.findIndex((existing) => existing.id === prospect.id)
+        if (index === -1) merged.push(prospect)
+        else merged[index] = prospect
+      })
+      database.value = {
+        ...database.value,
+        lastModified: new Date().toISOString(),
+        prospects: merged,
       }
-      selectedProspectId.value = null
+    } else {
+      database.value = {
+        ...parsed,
+        lastModified: new Date().toISOString(),
+        prospects: normalizedProspects,
+      }
     }
+    selectedProspectId.value = null
   }
 
   return {

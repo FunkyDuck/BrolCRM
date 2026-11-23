@@ -202,3 +202,11 @@ brol/
 2. Un thème `Paster Watecolor` : ["#b0a1ba","#a5b5bf","#abc8c7","#b8e2c8","#bff0d4"]
 3. Un thème `Sunny Beach` : ["#264653","#2a9d8f","#e9c46a","#f4a261","#e76f51"]
 4. Un thème `Rose Petal` : ["#880d1e","#dd2d4a","#f26a8d","#f49cbb","#cbeef3"]
+
+## 12. Modifications de fonctionnalités v1.5.3
+1. Ajouter l'autocomplétion pour le choix du pays et des villes
+2. Ajouter une normalisation des tags : tout en minuscule
+3. Déplacer l'importation et l'exportation dans la page paramètres
+4. Lors de l'importation de données, laisser la possibilité de fusionner ou d'écraser les données
+5. Déplacer le bouton "What's News" dans les paramètres.
+6. Enregistrer le numéro de version utilisé. Si mise à jour/version plus récente, afficher un "What's News" pour la dernière mise à jour et puis mettre à jour le numéro de version

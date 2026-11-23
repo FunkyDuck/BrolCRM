@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
 import { t } from '../i18n'
+import { cities, countries } from '../data/locations'
 
 const props = defineProps<{
   open: boolean
@@ -82,7 +83,7 @@ function submit() {
 }
 
 function addTag() {
-  const tag = tagInput.value.trim()
+  const tag = tagInput.value.trim().toLowerCase()
   if (!tag || tags.value.includes(tag)) return
   tags.value.push(tag)
   tagInput.value = ''
@@ -134,11 +135,17 @@ function addTag() {
           </label>
           <label>
             <span class="mb-1.5 block text-xs font-medium text-zinc-400">Ville</span>
-            <input v-model="city" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-400" />
+            <input v-model="city" list="city-suggestions" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-400" />
+            <datalist id="city-suggestions">
+              <option v-for="cityName in cities" :key="cityName" :value="cityName"></option>
+            </datalist>
           </label>
           <label class="col-span-2">
             <span class="mb-1.5 block text-xs font-medium text-zinc-400">Pays</span>
-            <input v-model="country" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-400" />
+            <input v-model="country" list="country-suggestions" class="w-full rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-amber-400" />
+            <datalist id="country-suggestions">
+              <option v-for="countryName in countries" :key="countryName" :value="countryName"></option>
+            </datalist>
           </label>
         </div>
         <div class="mb-5">

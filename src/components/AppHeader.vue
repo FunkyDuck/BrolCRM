@@ -7,8 +7,6 @@ defineProps<{
 }>()
 defineEmits<{
   add: []
-  export: []
-  import: []
   view: [view: 'list' | 'stats' | 'calendar' | 'whatsnew' | 'settings' | 'about']
   notifications: []
 }>()
@@ -39,7 +37,6 @@ defineEmits<{
         {{ t('statistics') }}
       </button>
       <button class="rounded-md px-3 py-2 text-sm" :class="activeView === 'calendar' ? 'bg-zinc-900 text-zinc-100' : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100'" @click="$emit('view', 'calendar')">{{ t('calendar') }}</button>
-      <button class="rounded-md px-3 py-2 text-sm" :class="activeView === 'whatsnew' ? 'bg-zinc-900 text-zinc-100' : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100'" @click="$emit('view', 'whatsnew')">{{ t('whatsNew') }}</button>
       <button class="rounded-md px-3 py-2 text-sm" :class="activeView === 'settings' ? 'bg-zinc-900 text-zinc-100' : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100'" @click="$emit('view', 'settings')">{{ t('settings') }}</button>
       <button
         class="relative rounded-md px-3 py-2 text-sm"
@@ -51,12 +48,6 @@ defineEmits<{
       <button class="relative rounded-md px-3 py-2 text-sm text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100" @click="$emit('notifications')" :title="t('notifications')">
         !
         <span v-if="notificationCount" class="absolute -right-1 -top-1 grid size-4 place-items-center rounded-full bg-amber-400 text-[9px] font-bold text-zinc-950">{{ notificationCount }}</span>
-      </button>
-      <button class="rounded-md px-3 py-2 text-sm text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100" @click="$emit('import')">
-        {{ t('import') }}
-      </button>
-      <button class="rounded-md px-3 py-2 text-sm text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100" @click="$emit('export')">
-        {{ t('export') }}
       </button>
       <button class="ml-1 rounded-md bg-amber-400 px-3.5 py-2 text-sm font-semibold text-zinc-950 hover:bg-amber-300" @click="$emit('add')">
         {{ t('addProspect') }}

@@ -27,6 +27,9 @@ const emit = defineEmits<{
   language: [language: LanguageCode]
   largeText: [enabled: boolean]
   clear: []
+  import: [mode: 'merge' | 'replace']
+  export: []
+  whatsNew: []
 }>()
 
 const confirmClear = ref(false)
@@ -86,6 +89,20 @@ const themes: { value: ThemeName; label: string; color: string }[] = [
         >
           <span class="absolute top-1 size-4 rounded-full bg-white transition-transform" :class="props.largeText ? 'left-6' : 'left-1'"></span>
         </button>
+      </section>
+
+      <section class="rounded-xl border border-zinc-800 p-5">
+        <h2 class="mb-4 text-sm font-semibold text-zinc-200">Données</h2>
+        <div class="flex flex-wrap gap-2">
+          <button class="rounded-md border border-zinc-700 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800" @click="emit('export')">{{ props.language === 'fr' ? 'Exporter' : 'Export' }}</button>
+          <button class="rounded-md border border-zinc-700 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800" @click="emit('import', 'merge')">{{ props.language === 'fr' ? 'Importer et fusionner' : 'Import and merge' }}</button>
+          <button class="rounded-md border border-zinc-700 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800" @click="emit('import', 'replace')">{{ props.language === 'fr' ? 'Importer et écraser' : 'Import and replace' }}</button>
+        </div>
+      </section>
+
+      <section class="rounded-xl border border-zinc-800 p-5">
+        <h2 class="mb-4 text-sm font-semibold text-zinc-200">{{ t('whatsNew') }}</h2>
+        <button class="rounded-md border border-zinc-700 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800" @click="emit('whatsNew')">{{ props.language === 'fr' ? 'Voir les nouveautés' : 'View release notes' }}</button>
       </section>
 
       <section class="rounded-xl border border-red-950 p-5">

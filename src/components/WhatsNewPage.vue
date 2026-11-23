@@ -2,6 +2,13 @@
 import { locale } from '../i18n'
 const releases = [
   {
+    version: '1.5.3',
+    title: locale.value === 'fr' ? 'Import, données et lieu' : 'Import, data and location',
+    items: locale.value === 'fr'
+      ? ['Autocomplétion pays et villes', 'Tags normalisés en minuscules', 'Import/export déplacés dans les paramètres', 'Fusion ou écrasement lors de l’import', 'Suivi des versions']
+      : ['Country and city autocomplete', 'Tags normalized to lowercase', 'Import/export moved to settings', 'Merge or replace imported data', 'Version tracking'],
+  },
+  {
     version: '1.5.2',
     title: 'Nouveaux thèmes',
     items: ['Thème Peach Sorbet', 'Thème Pastel Watercolor', 'Thème Sunny Beach', 'Thème Rose Petal'],
